@@ -22,8 +22,8 @@ Public demo repo (github.com/buffalo46/simpy-aws-demo, Shiro's personal GitHub a
 
 ## Steps
 
-1. App + tests, run locally. **(next)**
-2. CI workflow.
+1. App + tests, run locally. Done 2026-11-25 (Flask on Windows, `flask worker`, Redis in WSL; keep a WSL terminal open or WSL stops Redis).
+2. CI workflow. **(next)**
 3. AWS CLI installed (not yet on the laptop), login profile for the personal account, budget alert.
 4. CloudFormation stack.
 5. CD workflow.
