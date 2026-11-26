@@ -23,8 +23,8 @@ Public demo repo (github.com/buffalo46/simpy-aws-demo, Shiro's personal GitHub a
 ## Steps
 
 1. App + tests, run locally. Done 2026-11-25 (Flask on Windows, `flask worker`, Redis in WSL; keep a WSL terminal open or WSL stops Redis).
-2. CI workflow. **(next)**
-3. AWS CLI installed (not yet on the laptop), login profile for the personal account, budget alert.
-4. CloudFormation stack.
-5. CD workflow.
+2. CI workflow. Done 2026-11-25 (`.github/workflows/ci.yml`, green).
+3. AWS CLI installed, login profile for the personal account. Done 2026-11-25: CLI v2 unpacked to the user folder (no admin rights on the laptop); IAM user `shiro-admin` (console password, AdministratorAccess, no access keys); `aws login --profile demo` (us-east-1, 12-hour sessions). No Identity Center: it would end the free plan and its credits. No budget alert (Shiro's choice).
+4. CloudFormation stack. Done 2026-11-25: `infra/stack.yml`, stack `simpy-aws-demo` in us-east-1. Deploy/update: `aws cloudformation deploy --template-file infra/stack.yml --stack-name simpy-aws-demo --capabilities CAPABILITY_IAM --parameter-overrides AllowedCidr=<home ip>/32 --profile demo --region us-east-1`. Delete: `aws cloudformation delete-stack --stack-name simpy-aws-demo --profile demo --region us-east-1`. Outputs give instance ID, Elastic IP, sslip.io name, ECR URI, GitHub deploy role ARN (`aws cloudformation describe-stacks --stack-name simpy-aws-demo --profile demo --region us-east-1`).
+5. CD workflow. **(next)**
 6. Caddy login + HTTPS, demo.
