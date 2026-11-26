@@ -42,7 +42,15 @@ All AWS resources are in one CloudFormation template, [`infra/stack.yml`](infra/
 
 Outside AWS (all free): GitHub Actions for CI/CD, Let's Encrypt for the certificate, and [sslip.io](https://sslip.io) for a DNS name that points at the IP, so no domain has to be bought.
 
-Costs are us-east-1 on-demand list prices for a server running all month (730 hours). Data out is covered by the 100 GB/month free allowance. Deleting the stack brings the cost to $0.
+Costs are us-east-1 on-demand list prices for a server running all month (730 hours). Deleting the stack brings the cost to $0.
+
+**Does the cost grow with use?** Almost none of it does:
+
+- EC2, disk and the Elastic IP are billed by the hour, whether the site is busy or idle.
+- ECR storage is capped because only the last 10 images are kept.
+- SSM, IAM and CloudFormation are free however often they are used.
+- Data out is covered by the 100 GB/month free allowance, and only allowed IPs can reach the site.
+- One exception: a t3 instance starts in CPU "unlimited" mode. If long, heavy simulations keep the CPU above its 20% baseline until its saved credits run out, AWS charges $0.05 per vCPU-hour for the extra. Normal demo use stays under the baseline and costs nothing extra. The worst case, both vCPUs at 100% all month, adds about $58. Setting the instance to "standard" CPU mode removes this: the server slows down instead of billing more.
 
 ## Run locally
 
