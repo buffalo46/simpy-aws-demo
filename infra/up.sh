@@ -58,7 +58,7 @@ gh variable set SITE_NAME --body "$site"
 echo "== Deploy (CD workflow)"
 gh workflow run CD --ref main
 sleep 10
-run=$(gh run list --workflow CD --limit 1 --json databaseId -q '.[0].databaseId')
+run=$(gh run list --workflow CD --event workflow_dispatch --limit 1 --json databaseId -q '.[0].databaseId')
 gh run watch "$run" --exit-status --interval 15 >/dev/null ||
   { echo "Deploy failed: gh run view $run --log-failed"; exit 1; }
 
