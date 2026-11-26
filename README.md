@@ -63,13 +63,15 @@ uv run pytest
 uv run ruff check
 ```
 
-## Create and delete the AWS stack
+## Bring it up and take it down
 
 ```sh
-aws cloudformation deploy --template-file infra/stack.yml --stack-name simpy-aws-demo \
-  --capabilities CAPABILITY_IAM --parameter-overrides AllowedCidr=<your ip>/32
-
-aws cloudformation delete-stack --stack-name simpy-aws-demo
+bash infra/up.sh     # create or update the stack, set GitHub variables, deploy; prints the site address
+bash infra/down.sh   # delete everything (asks you to type "delete"); cost goes to $0
 ```
+
+`up.sh` allows HTTPS from your current public IP, or pass another one: `bash infra/up.sh 1.2.3.4`. It takes about 15 minutes on a fresh stack, mostly waiting. Each new stack gets a new Elastic IP, so the `<ip>.sslip.io` address changes after a down and up. Run `up.sh` again whenever your home IP changes.
+
+Before the first `up.sh`: log in with `aws login`, log in to `gh` as the repo owner, and store the login password hash once in SSM Parameter Store as `/simpy-aws-demo/auth-hash` (`up.sh` prints the commands if it is missing). `down.sh` keeps that parameter, so later relaunches skip this step.
 
 `aws cloudformation describe-stacks --stack-name simpy-aws-demo` shows the instance ID, IP, site name, ECR URI and deploy role ARN.

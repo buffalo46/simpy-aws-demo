@@ -2,6 +2,7 @@
 # Runs on the EC2 instance through SSM Run Command (sent by .github/workflows/cd.yml).
 # The workflow puts IMAGE, SITE_NAME and AWS_REGION in front of this script.
 set -euo pipefail
+cloud-init status --wait >/dev/null || true # a new server may still be installing Docker
 cd /opt/app
 
 registry="${IMAGE%%/*}"
