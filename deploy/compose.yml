@@ -1,0 +1,44 @@
+# Runs on the EC2 instance in /opt/app. remote-deploy.sh writes the .env next to it:
+# IMAGE, SITE_NAME, AUTH_USER, AUTH_HASH (bcrypt, from SSM Parameter Store).
+services:
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SITE_NAME: ${SITE_NAME}
+      AUTH_USER: ${AUTH_USER}
+      AUTH_HASH: ${AUTH_HASH}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data # certificates survive redeploys
+      - caddy_config:/config
+    depends_on:
+      - web
+
+  web:
+    image: ${IMAGE}
+    restart: unless-stopped
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - redis
+
+  worker:
+    image: ${IMAGE}
+    restart: unless-stopped
+    command: ["flask", "--app", "simpy_aws_demo.app", "worker"]
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
