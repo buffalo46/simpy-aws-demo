@@ -6,13 +6,13 @@
     .ts { fill: #5b6676; font-size: 11px; }
     .halo { paint-order: stroke; stroke: #ffffff; stroke-width: 4px; stroke-linejoin: round; }
     .arrow { stroke: #3d4652; stroke-width: 1.6; fill: none; }
-    .plan { stroke-dasharray: 6 4; }
+    .plan { }
     .bdg rect { fill: #232f3e; }
     .bdg text { fill: #ffffff; font-size: 12px; font-weight: 700; text-anchor: middle; }
     .gw { fill: #ffffff; }
     .gws { stroke: #ffffff; fill: none; stroke-width: 2; }
     .box { fill: #ffffff; stroke: #3d4652; stroke-width: 1.2; }
-    .ctr { fill: #ffffff; stroke: #ed7100; stroke-width: 1.2; stroke-dasharray: 6 4; }
+    .ctr { fill: #ffffff; stroke: #ed7100; stroke-width: 1.2; }
   </style>
   <defs>
     <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -85,14 +85,14 @@
   <rect x="124" y="139" width="22" height="15" rx="2" class="gw"/>
   <text class="t" x="135" y="180" text-anchor="middle">Let's Encrypt</text>
   <text class="ts" x="135" y="195" text-anchor="middle">certificate check, port 80</text>
-  <line class="arrow plan" x1="170" y1="205" x2="285" y2="306" marker-end="url(#ah)"/>
+  <line class="arrow" x1="170" y1="205" x2="285" y2="306" marker-end="url(#ah)"/>
 
   <!-- Viewers -->
   <circle cx="135" cy="306" r="10" fill="#16191f"/>
   <path d="M113 340 a22 20 0 0 1 44 0 z" fill="#16191f"/>
   <text class="t" x="135" y="360" text-anchor="middle">Demo viewers</text>
   <text class="ts" x="135" y="375" text-anchor="middle">browser, allowed IPs only</text>
-  <line class="arrow plan" x1="165" y1="328" x2="280" y2="328" marker-end="url(#ah)"/>
+  <line class="arrow" x1="165" y1="328" x2="280" y2="328" marker-end="url(#ah)"/>
   <text class="ts" x="222" y="321" text-anchor="middle">HTTPS 443</text>
 
   <!-- Developer -->
@@ -110,14 +110,14 @@
   <text class="ts" x="44" y="586">Repo + Actions workflows</text>
   <rect x="44" y="598" width="182" height="32" rx="3" fill="none" stroke="#1d8102" stroke-width="1.2"/>
   <text class="t" x="54" y="618">CI: ruff + pytest, every push</text>
-  <rect x="44" y="638" width="182" height="32" rx="3" fill="none" stroke="#b45f06" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <rect x="44" y="638" width="182" height="32" rx="3" fill="none" stroke="#1d8102" stroke-width="1.2"/>
   <text class="t" x="54" y="658">CD: build, push, deploy</text>
 
   <!-- Deploy path -->
-  <polyline class="arrow plan" points="226,654 262,654 262,630 1110,630 1110,150"/>
-  <line class="arrow plan" x1="1110" y1="150" x2="1040" y2="150" marker-end="url(#ah)"/>
-  <line class="arrow plan" x1="1110" y1="262" x2="1040" y2="262" marker-end="url(#ah)"/>
-  <line class="arrow plan" x1="1110" y1="448" x2="1040" y2="448" marker-end="url(#ah)"/>
+  <polyline class="arrow" points="226,654 262,654 262,630 1110,630 1110,150"/>
+  <line class="arrow" x1="1110" y1="150" x2="1040" y2="150" marker-end="url(#ah)"/>
+  <line class="arrow" x1="1110" y1="262" x2="1040" y2="262" marker-end="url(#ah)"/>
+  <line class="arrow" x1="1110" y1="448" x2="1040" y2="448" marker-end="url(#ah)"/>
 
   <!-- IAM -->
   <rect x="984" y="124" width="52" height="52" fill="#dd344c"/>
@@ -133,7 +133,7 @@
   <rect x="1003" y="266" width="14" height="10" class="gws" stroke-width="1.6"/>
   <text class="tb" x="1010" y="304" text-anchor="middle">Amazon ECR</text>
   <text class="ts" x="1010" y="319" text-anchor="middle">image repo, keeps last 10</text>
-  <line class="arrow plan" x1="982" y1="262" x2="812" y2="262" marker-end="url(#ah)"/>
+  <line class="arrow" x1="982" y1="262" x2="812" y2="262" marker-end="url(#ah)"/>
   <text class="ts halo" x="925" y="254" text-anchor="middle">pull image</text>
 
   <!-- SSM -->
@@ -141,7 +141,7 @@
   <text x="1010" y="454" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700" font-family="Consolas, monospace">&gt;_</text>
   <text class="tb" x="1010" y="490" text-anchor="middle">Systems Manager</text>
   <text class="ts" x="1010" y="505" text-anchor="middle">Run Command + Session Manager</text>
-  <line class="arrow plan" x1="982" y1="448" x2="812" y2="448" marker-end="url(#ah)"/>
+  <line class="arrow" x1="982" y1="448" x2="812" y2="448" marker-end="url(#ah)"/>
   <text class="ts halo" x="925" y="440" text-anchor="middle">compose pull + up</text>
 
   <!-- CloudFormation -->
@@ -151,11 +151,6 @@
   <text class="tb" x="380" y="686">AWS CloudFormation · stack simpy-aws-demo</text>
   <text class="ts" x="380" y="703">Creates everything in this region box. One delete-stack command removes it all.</text>
 
-  <!-- Legend -->
-  <line class="arrow" x1="900" y1="676" x2="934" y2="676"/>
-  <text class="ts" x="942" y="680">built and live</text>
-  <line class="arrow plan" x1="900" y1="700" x2="934" y2="700"/>
-  <text class="ts" x="942" y="704">coming next</text>
 
   <!-- Step badges -->
   <g class="bdg">

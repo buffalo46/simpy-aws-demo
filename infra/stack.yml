@@ -10,8 +10,11 @@ Parameters:
     AllowedPattern: '^(\d{1,3}\.){3}\d{1,3}/\d{1,2}$'
   GitHubRepo:
     Type: String
-    Default: buffalo46/simpy-aws-demo
-    Description: owner/name of the repo allowed to deploy
+    Default: buffalo46@25193094/simpy-aws-demo@1472622232
+    Description: >
+      Repo allowed to deploy, as it appears in GitHub's OIDC subject claim. This repo uses
+      immutable subjects (owner@id/name@id); see
+      gh api repos/OWNER/REPO/actions/oidc/customization/sub
   InstanceType:
     Type: String
     Default: t3.small

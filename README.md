@@ -24,8 +24,6 @@ The app is a Flask web page plus a Redis job queue (RQ) and a separate worker th
 9. Actions sends an SSM Run Command to the instance: `docker compose pull && docker compose up -d`.
 10. The instance pulls the new image from ECR and restarts the containers.
 
-Dashed lines in the diagram are still being built.
-
 ## AWS services and cost
 
 All AWS resources are in one CloudFormation template, [`infra/stack.yml`](infra/stack.yml), in us-east-1.
