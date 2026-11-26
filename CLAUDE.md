@@ -18,7 +18,7 @@ Public demo repo (github.com/buffalo46/simpy-aws-demo, Shiro's personal GitHub a
 - **Local:** `uv run flask run` + `uv run rq worker` (or a `flask worker` command), Redis in WSL. Docker is not installed on the laptop: GitHub Actions builds the images.
 - **AWS:** one EC2 instance (x86, t3.small, so GitHub's normal runners build the image without cross-building) with Docker Compose: caddy (HTTPS + password login), web, redis, worker. Elastic IP; HTTPS on a free `<ip>.sslip.io` name via Let's Encrypt; security group 443 from allowed IPs, 80 open for the cert check, 22 closed; admin through SSM Session Manager; ECR for images; budget alert. All AWS pieces in one CloudFormation template in the repo, so one command creates and one deletes everything.
 - **CI/CD (GitHub Actions):** on push: pytest + ruff. On merge to main: build image, push to ECR, deploy by SSM send-command (`docker compose pull && docker compose up -d`). AWS login by GitHub OIDC role, limited to this repo's main branch, ECR push and SSM on this instance.
-- Cost: about $15-20/month while up, $0 after deleting the stack.
+- Cost: about $21/month while up (EC2 $15, Elastic IP $3.65, disk $1.60; see README), $0 after deleting the stack.
 
 ## Steps
 

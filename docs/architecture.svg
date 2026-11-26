@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-label="simpy-aws-demo architecture on AWS">
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; }
+    .t { fill: #16191f; font-size: 12px; font-weight: 500; }
+    .tb { fill: #16191f; font-size: 12.5px; font-weight: 700; }
+    .ts { fill: #5b6676; font-size: 11px; }
+    .halo { paint-order: stroke; stroke: #ffffff; stroke-width: 4px; stroke-linejoin: round; }
+    .arrow { stroke: #3d4652; stroke-width: 1.6; fill: none; }
+    .plan { stroke-dasharray: 6 4; }
+    .bdg rect { fill: #232f3e; }
+    .bdg text { fill: #ffffff; font-size: 12px; font-weight: 700; text-anchor: middle; }
+    .gw { fill: #ffffff; }
+    .gws { stroke: #ffffff; fill: none; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #3d4652; stroke-width: 1.2; }
+    .ctr { fill: #ffffff; stroke: #ed7100; stroke-width: 1.2; stroke-dasharray: 6 4; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3d4652"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="760" fill="#ffffff"/>
+
+  <!-- AWS Cloud -->
+  <rect x="260" y="20" width="920" height="730" fill="none" stroke="#232f3e" stroke-width="1.5"/>
+  <rect x="260" y="20" width="30" height="30" fill="#232f3e"/>
+  <text x="275" y="40" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700">aws</text>
+  <text class="tb" x="300" y="40">AWS Cloud</text>
+
+  <!-- Region -->
+  <rect x="280" y="60" width="880" height="675" fill="none" stroke="#00a4a6" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="292" y="80" fill="#00a4a6" font-size="12" font-weight="600">Region us-east-1 (N. Virginia)</text>
+
+  <!-- VPC -->
+  <rect x="300" y="100" width="570" height="480" fill="none" stroke="#8c4fff" stroke-width="1.5"/>
+  <rect x="300" y="100" width="28" height="28" fill="#8c4fff"/>
+  <text x="314" y="118" text-anchor="middle" fill="#ffffff" font-size="8" font-weight="700">VPC</text>
+  <text x="336" y="119" fill="#8c4fff" font-size="12" font-weight="600">Default VPC</text>
+
+  <!-- Public subnet -->
+  <rect x="320" y="140" width="530" height="422" fill="#7aa11610" stroke="#7aa116" stroke-width="1.2"/>
+  <rect x="320" y="140" width="26" height="26" fill="#7aa116"/>
+  <path class="gws" d="M327 156 v-5 a6 6 0 0 1 12 0 v5" stroke-width="1.6"/>
+  <rect x="326" y="155" width="14" height="7" class="gw"/>
+  <text x="354" y="158" fill="#7aa116" font-size="12" font-weight="600">Public subnet</text>
+
+  <!-- Security group -->
+  <rect x="340" y="180" width="490" height="362" fill="none" stroke="#dd344c" stroke-width="1.3" stroke-dasharray="6 4"/>
+  <text x="350" y="198" fill="#dd344c" font-size="11.5" font-weight="600">Security group: 443 from allowed IPs · 80 open for cert check · 22 closed</text>
+
+  <!-- EC2 instance -->
+  <rect x="380" y="220" width="430" height="300" fill="none" stroke="#ed7100" stroke-width="1.5"/>
+  <rect x="380" y="220" width="26" height="26" fill="#ed7100"/>
+  <rect x="387" y="227" width="12" height="12" class="gws" stroke-width="1.6"/>
+  <text class="tb" x="414" y="238">EC2 t3.small · Amazon Linux 2023 · Docker Compose</text>
+  <text class="ts" x="414" y="254">Encrypted 20 GB disk · IMDSv2 · instance role: SSM + ECR read</text>
+
+  <!-- Containers -->
+  <rect x="410" y="300" width="100" height="56" rx="4" class="ctr"/>
+  <text class="tb" x="460" y="324" text-anchor="middle">caddy</text>
+  <text class="ts" x="460" y="341" text-anchor="middle">HTTPS + login</text>
+  <rect x="545" y="300" width="100" height="56" rx="4" class="ctr"/>
+  <text class="tb" x="595" y="324" text-anchor="middle">web</text>
+  <text class="ts" x="595" y="341" text-anchor="middle">Flask page</text>
+  <rect x="680" y="300" width="100" height="56" rx="4" class="ctr"/>
+  <text class="tb" x="730" y="324" text-anchor="middle">redis</text>
+  <text class="ts" x="730" y="341" text-anchor="middle">RQ job queue</text>
+  <rect x="680" y="420" width="100" height="56" rx="4" class="ctr"/>
+  <text class="tb" x="730" y="444" text-anchor="middle">worker</text>
+  <text class="ts" x="730" y="461" text-anchor="middle">runs SimPy</text>
+  <line class="arrow" x1="510" y1="328" x2="543" y2="328" marker-end="url(#ah)"/>
+  <line class="arrow" x1="645" y1="328" x2="678" y2="328" marker-end="url(#ah)"/>
+  <line class="arrow" x1="730" y1="360" x2="730" y2="416" marker-start="url(#ah)" marker-end="url(#ah)"/>
+
+  <!-- Elastic IP -->
+  <rect x="282" y="310" width="36" height="36" fill="#8c4fff"/>
+  <text x="300" y="333" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700">IP</text>
+  <text class="t halo" x="300" y="364" text-anchor="middle">Elastic IP</text>
+  <text class="ts halo" x="300" y="379" text-anchor="middle">&lt;ip&gt;.sslip.io</text>
+  <line class="arrow" x1="318" y1="328" x2="408" y2="328" marker-end="url(#ah)"/>
+
+  <!-- Let's Encrypt -->
+  <rect x="113" y="118" width="44" height="44" rx="4" fill="#6b7785"/>
+  <path class="gws" d="M127 140 v-6 a8 8 0 0 1 16 0 v6"/>
+  <rect x="124" y="139" width="22" height="15" rx="2" class="gw"/>
+  <text class="t" x="135" y="180" text-anchor="middle">Let's Encrypt</text>
+  <text class="ts" x="135" y="195" text-anchor="middle">certificate check, port 80</text>
+  <line class="arrow plan" x1="170" y1="205" x2="285" y2="306" marker-end="url(#ah)"/>
+
+  <!-- Viewers -->
+  <circle cx="135" cy="306" r="10" fill="#16191f"/>
+  <path d="M113 340 a22 20 0 0 1 44 0 z" fill="#16191f"/>
+  <text class="t" x="135" y="360" text-anchor="middle">Demo viewers</text>
+  <text class="ts" x="135" y="375" text-anchor="middle">browser, allowed IPs only</text>
+  <line class="arrow plan" x1="165" y1="328" x2="280" y2="328" marker-end="url(#ah)"/>
+  <text class="ts" x="222" y="321" text-anchor="middle">HTTPS 443</text>
+
+  <!-- Developer -->
+  <circle cx="135" cy="430" r="10" fill="#16191f"/>
+  <path d="M113 464 a22 20 0 0 1 44 0 z" fill="#16191f"/>
+  <text class="t" x="135" y="484" text-anchor="middle">Developer</text>
+  <line class="arrow" x1="135" y1="494" x2="135" y2="538" marker-end="url(#ah)"/>
+  <text class="ts" x="142" y="520">git push</text>
+
+  <!-- GitHub -->
+  <rect x="30" y="540" width="210" height="170" rx="4" class="box"/>
+  <rect x="30" y="540" width="28" height="28" fill="#232f3e"/>
+  <text x="44" y="558" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">GH</text>
+  <text class="tb" x="66" y="559">GitHub</text>
+  <text class="ts" x="44" y="586">Repo + Actions workflows</text>
+  <rect x="44" y="598" width="182" height="32" rx="3" fill="none" stroke="#1d8102" stroke-width="1.2"/>
+  <text class="t" x="54" y="618">CI: ruff + pytest, every push</text>
+  <rect x="44" y="638" width="182" height="32" rx="3" fill="none" stroke="#b45f06" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <text class="t" x="54" y="658">CD: build, push, deploy</text>
+
+  <!-- Deploy path -->
+  <polyline class="arrow plan" points="226,654 262,654 262,630 1110,630 1110,150"/>
+  <line class="arrow plan" x1="1110" y1="150" x2="1040" y2="150" marker-end="url(#ah)"/>
+  <line class="arrow plan" x1="1110" y1="262" x2="1040" y2="262" marker-end="url(#ah)"/>
+  <line class="arrow plan" x1="1110" y1="448" x2="1040" y2="448" marker-end="url(#ah)"/>
+
+  <!-- IAM -->
+  <rect x="984" y="124" width="52" height="52" fill="#dd344c"/>
+  <path class="gws" d="M1010 134 l14 5 v10 c0 9 -6 14 -14 17 c-8 -3 -14 -8 -14 -17 v-10 z"/>
+  <text class="tb" x="1010" y="192" text-anchor="middle">IAM</text>
+  <text class="ts" x="1010" y="207" text-anchor="middle">OIDC provider + deploy role</text>
+  <text class="ts" x="1010" y="221" text-anchor="middle">main branch only</text>
+
+  <!-- ECR -->
+  <rect x="984" y="236" width="52" height="52" fill="#ed7100"/>
+  <rect x="994" y="252" width="14" height="10" class="gws" stroke-width="1.6"/>
+  <rect x="1012" y="252" width="14" height="10" class="gws" stroke-width="1.6"/>
+  <rect x="1003" y="266" width="14" height="10" class="gws" stroke-width="1.6"/>
+  <text class="tb" x="1010" y="304" text-anchor="middle">Amazon ECR</text>
+  <text class="ts" x="1010" y="319" text-anchor="middle">image repo, keeps last 10</text>
+  <line class="arrow plan" x1="982" y1="262" x2="812" y2="262" marker-end="url(#ah)"/>
+  <text class="ts halo" x="925" y="254" text-anchor="middle">pull image</text>
+
+  <!-- SSM -->
+  <rect x="984" y="422" width="52" height="52" fill="#e7157b"/>
+  <text x="1010" y="454" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700" font-family="Consolas, monospace">&gt;_</text>
+  <text class="tb" x="1010" y="490" text-anchor="middle">Systems Manager</text>
+  <text class="ts" x="1010" y="505" text-anchor="middle">Run Command + Session Manager</text>
+  <line class="arrow plan" x1="982" y1="448" x2="812" y2="448" marker-end="url(#ah)"/>
+  <text class="ts halo" x="925" y="440" text-anchor="middle">compose pull + up</text>
+
+  <!-- CloudFormation -->
+  <rect x="320" y="666" width="48" height="48" fill="#e7157b"/>
+  <rect x="330" y="676" width="22" height="14" class="gws" stroke-width="1.6"/>
+  <rect x="336" y="690" width="22" height="14" class="gws" stroke-width="1.6"/>
+  <text class="tb" x="380" y="686">AWS CloudFormation · stack simpy-aws-demo</text>
+  <text class="ts" x="380" y="703">Creates everything in this region box. One delete-stack command removes it all.</text>
+
+  <!-- Legend -->
+  <line class="arrow" x1="900" y1="676" x2="934" y2="676"/>
+  <text class="ts" x="942" y="680">built and live</text>
+  <line class="arrow plan" x1="900" y1="700" x2="934" y2="700"/>
+  <text class="ts" x="942" y="704">coming next</text>
+
+  <!-- Step badges -->
+  <g class="bdg">
+    <rect x="211" y="335" width="22" height="22" rx="3"/><text x="222" y="351">1</text>
+    <rect x="516" y="280" width="22" height="22" rx="3"/><text x="527" y="296">2</text>
+    <rect x="651" y="280" width="22" height="22" rx="3"/><text x="662" y="296">3</text>
+    <rect x="742" y="377" width="22" height="22" rx="3"/><text x="753" y="393">4</text>
+    <rect x="208" y="240" width="22" height="22" rx="3"/><text x="219" y="256">5</text>
+    <rect x="92" y="505" width="22" height="22" rx="3"/><text x="103" y="521">6</text>
+    <rect x="1064" y="124" width="22" height="22" rx="3"/><text x="1075" y="140">7</text>
+    <rect x="1064" y="236" width="22" height="22" rx="3"/><text x="1075" y="252">8</text>
+    <rect x="1064" y="422" width="22" height="22" rx="3"/><text x="1075" y="438">9</text>
+    <rect x="870" y="270" width="22" height="22" rx="3"/><text x="881" y="286">10</text>
+  </g>
+</svg>
